@@ -4,7 +4,7 @@ from empleados_app.infrastructure.persistence.models.pago import PagoModel
 from empleados_app.infrastructure.persistence.models.empleado import EmpleadoModel
 from typing import List
 
-class RepositorioPagoDjango(IRepositorioPago):
+class RepositorioPago(IRepositorioPago):
 
     def guardar(self, pago: Pago) -> None:
         empleado = EmpleadoModel.objects.get(pk=pago.empleado_id)

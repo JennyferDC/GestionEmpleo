@@ -7,3 +7,9 @@ class INotificador(ABC):
     @abstractmethod
     def enviar(self, notificacion: Notificacion) -> None:
         pass
+
+class IServicioNotificacion(ABC):
+    
+    @abstractmethod
+    def enviar(self, destinatario: str, mensaje: str) -> None:
+        pass

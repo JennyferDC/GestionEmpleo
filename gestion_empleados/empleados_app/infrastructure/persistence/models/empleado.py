@@ -3,9 +3,9 @@ from django.db import models
 
 class EmpleadoModel(models.Model):
     TIPO_CHOICES = [
-        ('tiempo_completo', 'Tiempo Completo'),
-        ('medio_tiempo', 'Medio Tiempo'),
-        ('contratista', 'Contratista'),
+        ('tiempo_completo', 'tiempo_completo'),
+        ('medio_tiempo', 'medio_tiempo'),
+        ('contratista', 'contratista'),
     ]
 
     nombre = models.CharField(max_length=100)

@@ -1,12 +1,10 @@
 from io import BytesIO
-from domain.ports.servicio_reporte import IServicioReporte
+from empleados_app.domain.ports.generador_reporte import IGeneradorReporte
 
+class PDFAdapter(IGeneradorReporte):
 
-class PDFAdapter(IServicioReporte):
-    
-
-    def generar(self, nomina):
+    def generar(self, nomina) -> bytes:
         buffer = BytesIO()
-        # --- aquí iría reportlab, por ahora solo demostrativo ---
+        # Aquí iría el uso de reportlab o similar para generar el PDF
         buffer.write(b"%PDF-1.4\n% ... contenido ficticio ...\n")
         return buffer.getvalue()

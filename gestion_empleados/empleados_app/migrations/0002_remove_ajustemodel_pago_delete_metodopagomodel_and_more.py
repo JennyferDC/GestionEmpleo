@@ -93,7 +93,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='empleadomodel',
             name='tipo_empleado',
-            field=models.CharField(choices=[('tiempo_completo', 'Tiempo Completo'), ('medio_tiempo', 'Medio Tiempo'), ('contratista', 'Contratista')], max_length=20),
+            field=models.CharField(choices=[('tiempo_completo', 'tiempo_completo'), ('medio_tiempo', 'medio_tiempo'), ('contratista', 'contratista')], max_length=20),
         ),
         migrations.AlterField(
             model_name='notificacionmodel',

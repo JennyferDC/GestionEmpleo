@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('dni', models.CharField(max_length=20, unique=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('fecha_ingreso', models.DateField()),
-                ('tipo_empleado', models.CharField(choices=[('Tiempo Completo', 'Tiempo Completo'), ('Medio Tiempo', 'Medio Tiempo'), ('Contratista', 'Contratista')], max_length=20)),
+                ('tipo_empleado', models.CharField(choices=[('tiempo_completo', 'tiempo_completo'), ('medio_tiempo', 'medio_tiempo'), ('contratista', 'contratista')], max_length=20)),
                 ('salario_fijo', models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True)),
                 ('salario_hora', models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True)),
                 ('horas_trabajadas', models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),

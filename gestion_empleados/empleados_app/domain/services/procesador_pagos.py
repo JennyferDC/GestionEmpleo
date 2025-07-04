@@ -1,3 +1,6 @@
+
+from empleados_app.domain.entities.notificacion import Notificacion 
+
 from empleados_app.domain.ports.repositorio_empleado import IRepositorioEmpleado
 from empleados_app.domain.ports.repositorio_pago import IRepositorioPago
 from empleados_app.domain.ports.notificador import INotificador
@@ -7,10 +10,12 @@ from datetime import date
 
 class ProcesadorPagos:
 
-    def __init__(self, 
-                 repo_empleado: IRepositorioEmpleado,
-                 repo_pago: IRepositorioPago,
-                 notificador: INotificador):
+    def __init__(
+        self,
+        repo_empleado: IRepositorioEmpleado,
+        repo_pago: IRepositorioPago,
+        notificador: INotificador,
+    ):
         self.repo_empleado = repo_empleado
         self.repo_pago = repo_pago
         self.notificador = notificador
@@ -25,14 +30,14 @@ class ProcesadorPagos:
             pago = Pago(
                 empleado_id=empleado.id,
                 monto_pagado=salario,
-                fecha_pago=date.today()
+                fecha_pago=date.today(),
             )
-
             self.repo_pago.guardar(pago)
 
             mensaje = f"Se ha procesado el pago de {salario:.2f} para {empleado.nombre}"
-            self.notificador.enviar(
+            notificacion = Notificacion(
                 destinatario=empleado.email,
                 mensaje=mensaje,
-                tipo="email"  
+                tipo="email",
             )
+            self.notificador.enviar(notificacion)   # ✅

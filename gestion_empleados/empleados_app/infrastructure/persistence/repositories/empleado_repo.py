@@ -17,7 +17,7 @@ class RepositorioEmpleado(IRepositorioEmpleado):
             "dni": empleado.dni,
             "email": empleado.email,
             "fecha_ingreso": empleado.fecha_ingreso,
-            "tipo": empleado.tipo_empleado,
+            "tipo_empleado": empleado.tipo_empleado,
         }
 
         if isinstance(empleado, EmpleadoTiempoCompleto):
@@ -40,6 +40,8 @@ class RepositorioEmpleado(IRepositorioEmpleado):
     def obtener_todos(self) -> List[Empleado]:
         return [self._to_entity(emp) for emp in EmpleadoModel.objects.all()]
 
+
+
     def _to_entity(self, emp: EmpleadoModel) -> Empleado:
         if emp.tipo_empleado == "tiempo_completo":
             return EmpleadoTiempoCompleto(
@@ -47,6 +49,7 @@ class RepositorioEmpleado(IRepositorioEmpleado):
                 email=emp.email, fecha_ingreso=emp.fecha_ingreso,
                 salario_mensual=emp.salario_mensual
             )
+            
         elif emp.tipo_empleado == "medio_tiempo":
             return EmpleadoMedioTiempo(
                 id=emp.id, nombre=emp.nombre, dni=emp.dni,
