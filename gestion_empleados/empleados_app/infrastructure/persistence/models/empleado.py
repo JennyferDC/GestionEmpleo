@@ -1,11 +1,11 @@
 from django.db import models
 
-class EmpleadoModel(models.Model):
 
+class EmpleadoModel(models.Model):
     TIPO_CHOICES = [
-        ('Tiempo Completo', 'Tiempo Completo'),
-        ('Medio Tiempo', 'Medio Tiempo'),
-        ('Contratista', 'Contratista'),
+        ('tiempo_completo', 'Tiempo Completo'),
+        ('medio_tiempo', 'Medio Tiempo'),
+        ('contratista', 'Contratista'),
     ]
 
     nombre = models.CharField(max_length=100)
@@ -13,12 +13,16 @@ class EmpleadoModel(models.Model):
     email = models.EmailField()
     fecha_ingreso = models.DateField()
     tipo_empleado = models.CharField(max_length=20, choices=TIPO_CHOICES)
+        
 
-    # Campos opcionales según el tipo
-    salario_fijo = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    salario_hora = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    horas_trabajadas = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    tarifa_proyecto = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    salario_mensual = models.FloatField(null=True, blank=True)
+    horas_trabajadas = models.IntegerField(null=True, blank=True)
+    tarifa_hora = models.FloatField(null=True, blank=True)
+    pago_contrato = models.FloatField(null=True, blank=True)
 
+    
+    def __str__(self):
+        return f"{self.nombre} ({self.tipo_empleado})"
+    
     class Meta:
         db_table = 'empleados'

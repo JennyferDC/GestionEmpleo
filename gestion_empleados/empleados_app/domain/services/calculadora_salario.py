@@ -1,6 +1,6 @@
-class CalculadoraSalario:
+from empleados_app.domain.entities.empleado import Empleado
 
-    def calcular(self, empleado) -> float:
-        if not hasattr(empleado, "calcular_salario"):
-            raise TypeError("El objeto no implementa el método calcular_salario()")
+class CalculadoraSalario:
+    
+    def calcular(self, empleado: Empleado) -> float:
         return empleado.calcular_salario()

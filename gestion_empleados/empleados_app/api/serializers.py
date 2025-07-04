@@ -11,12 +11,9 @@ class EmpleadoSerializer(serializers.ModelSerializer):
             "email",
             "fecha_ingreso",
             "tipo_empleado",
-            "salario_fijo",
-            "salario_hora",
+            "salario_mensual",
             "horas_trabajadas",
-            "tarifa_proyecto",
+            "tarifa_hora",
+            "pago_contrato",
         ]
 
-class ProcesarNominaSerializer(serializers.Serializer):
-    fecha_inicio = serializers.DateField()
-    fecha_fin   = serializers.DateField()

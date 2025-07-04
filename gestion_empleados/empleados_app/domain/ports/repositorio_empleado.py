@@ -1,14 +1,17 @@
 from abc import ABC, abstractmethod
 from typing import List
-from empleados_app.domain.entities.empleado import EmpleadoBase
-
+from empleados_app.domain.entities.empleado import Empleado
 
 class IRepositorioEmpleado(ABC):
 
     @abstractmethod
-    def obtener_todos(self) -> List[EmpleadoBase]:
+    def guardar(self, empleado: Empleado) -> None:
         pass
 
     @abstractmethod
-    def obtener_por_dni(self, dni: str) -> EmpleadoBase:
+    def obtener_por_id(self, id: int) -> Empleado:
+        pass
+
+    @abstractmethod
+    def obtener_todos(self) -> List[Empleado]:
         pass

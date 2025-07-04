@@ -1,4 +1,4 @@
-from domain.ports.servicio_notificacion import IServicioNotificacion
+from gestion_empleados.empleados_app.domain.ports.notificador import IServicioNotificacion
 
 
 class SMSAdapter(IServicioNotificacion):

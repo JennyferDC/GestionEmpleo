@@ -1,27 +1,12 @@
-from typing import List, Dict
-from domain.entities.nomina import Nomina
+from empleados_app.domain.ports.repositorio_empleado import IRepositorioEmpleado
+from empleados_app.domain.ports.generador_reporte import IGeneradorReporte
 
-class GeneradorReporte:
+class GeneradorReporteEmpleados:
 
-    def generar(self, nomina: Nomina) -> Dict:
-        reporte = {
-            "periodo": {
-                "inicio": nomina.fecha_inicio.isoformat(),
-                "fin": nomina.fecha_fin.isoformat(),
-            },
-            "total_pagado": nomina.total_pagado(),
-            "pagos": []
-        }
+    def __init__(self, repo_empleado: IRepositorioEmpleado, generador: IGeneradorReporte):
+        self.repo_empleado = repo_empleado
+        self.generador = generador
 
-        for pago in nomina.pagos:
-            reporte["pagos"].append({
-                "empleado_dni": pago.empleado_dni,
-                "monto_base": pago.monto_base,
-                "ajustes": [
-                    {"concepto": ajuste.concepto, "monto": ajuste.monto}
-                    for ajuste in pago.ajustes
-                ],
-                "total": pago.calcular_total()
-            })
-
-        return reporte
+    def generar(self, formato: str) -> bytes:
+        empleados = self.repo_empleado.obtener_todos()
+        return self.generador.generar(empleados, formato)

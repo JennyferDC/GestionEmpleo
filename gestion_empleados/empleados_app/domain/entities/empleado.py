@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
 from datetime import date
 
-
-class EmpleadoBase(ABC):
-
-    def __init__(self, nombre: str, dni: str, email: str, fecha_ingreso: date, tipo_empleado: str):
+class Empleado(ABC):
+    def __init__(self, id: int, nombre: str, dni: str, email: str, fecha_ingreso: date, tipo_empleado: str):
+        self.id = id
         self.nombre = nombre
         self.dni = dni
         self.email = email
@@ -15,32 +14,30 @@ class EmpleadoBase(ABC):
     def calcular_salario(self) -> float:
         pass
 
-class EmpleadoTiempoCompleto(EmpleadoBase):
 
-    def __init__(self, nombre, dni, email, fecha_ingreso, salario_mensual: float):
-        super().__init__(nombre, dni, email, fecha_ingreso, "Tiempo Completo")
+class EmpleadoTiempoCompleto(Empleado):
+    def __init__(self, id: int, nombre: str, dni: str, email: str, fecha_ingreso: date, salario_mensual: float):
+        super().__init__(id, nombre, dni, email, fecha_ingreso, tipo_empleado="tiempo_completo")
         self.salario_mensual = salario_mensual
 
     def calcular_salario(self) -> float:
         return self.salario_mensual
 
 
-class EmpleadoMedioTiempo(EmpleadoBase):
-
-    def __init__(self, nombre, dni, email, fecha_ingreso, salario_hora: float, horas_trabajadas: float):
-        super().__init__(nombre, dni, email, fecha_ingreso, "Medio Tiempo")
-        self.salario_hora = salario_hora
+class EmpleadoMedioTiempo(Empleado):
+    def __init__(self, id: int, nombre: str, dni: str, email: str, fecha_ingreso: date, horas_trabajadas: int, tarifa_hora: float):
+        super().__init__(id, nombre, dni, email, fecha_ingreso, tipo_empleado="medio_tiempo")
         self.horas_trabajadas = horas_trabajadas
+        self.tarifa_hora = tarifa_hora
 
     def calcular_salario(self) -> float:
-        return self.salario_hora * self.horas_trabajadas
+        return self.horas_trabajadas * self.tarifa_hora
 
 
-class Contratista(EmpleadoBase):
-
-    def __init__(self, nombre, dni, email, fecha_ingreso, tarifa_proyecto: float):
-        super().__init__(nombre, dni, email, fecha_ingreso, "Contratista")
-        self.tarifa_proyecto = tarifa_proyecto
+class Contratista(Empleado):
+    def __init__(self, id: int, nombre: str, dni: str, email: str, fecha_ingreso: date, pago_contrato: float):
+        super().__init__(id, nombre, dni, email, fecha_ingreso, tipo_empleado="contratista")
+        self.pago_contrato = pago_contrato
 
     def calcular_salario(self) -> float:
-        return self.tarifa_proyecto
+        return self.pago_contrato
