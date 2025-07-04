@@ -40,4 +40,4 @@ class ProcesadorPagos:
                 mensaje=mensaje,
                 tipo="email",
             )
-            self.notificador.enviar(notificacion)   # ✅
+            self.notificador.enviar(notificacion)  
